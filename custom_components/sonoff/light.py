@@ -760,13 +760,10 @@ class XLightL3(XLightL1):
 
         if effect and effect in self.modes:
             custom_speed = self.device.get("params", {}).get("effect_speed", 50)
-            custom_brightness = self.device.get("params", {}).get("effect_brightness", 100)
 
             for key in list(params.keys()):
                 if key.startswith("speed"):
                     params[key] = int(custom_speed)
-                elif key.startswith("bright"):
-                    params[key] = int(custom_brightness)
 
         return params
 

@@ -163,36 +163,3 @@ class XEffectSpeed(XEntity, RestoreNumber):
         self._attr_native_value = val
         self.device.setdefault("params", {})["effect_speed"] = val
         self.async_write_ha_state()
-
-
-class XEffectBrightness(XEntity, RestoreNumber):
-    uid = "effect_brightness"
-
-    _attr_entity_category = EntityCategory.CONFIG
-    _attr_icon = "mdi:brightness-6"
-    _attr_native_min_value = 1
-    _attr_native_max_value = 100
-    _attr_native_step = 1
-    _attr_native_value = 100
-
-    def set_state(self, params: dict):
-        if "effect_brightness" in params:
-            self._attr_native_value = params["effect_brightness"]
-
-    async def async_added_to_hass(self) -> None:
-        await super().async_added_to_hass()
-        if (
-            last_data := await self.async_get_last_number_data()
-        ) and last_data.native_value is not None:
-            self._attr_native_value = last_data.native_value
-            self.device.setdefault("params", {})["effect_brightness"] = int(
-                last_data.native_value
-            )
-        else:
-            self.device.setdefault("params", {})["effect_brightness"] = 100
-
-    async def async_set_native_value(self, value: float) -> None:
-        val = int(value)
-        self._attr_native_value = val
-        self.device.setdefault("params", {})["effect_brightness"] = val
-        self.async_write_ha_state()
