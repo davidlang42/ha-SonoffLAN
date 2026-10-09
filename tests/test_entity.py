@@ -54,7 +54,13 @@ from custom_components.sonoff.light import (
     XT5EffectStatus,
     XT5Light,
 )
-from custom_components.sonoff.number import DEVICE_DURATION, XNumber, XPulseWidth
+from custom_components.sonoff.number import (
+    DEVICE_DURATION,
+    XEffectBrightness,
+    XEffectSpeed,
+    XNumber,
+    XPulseWidth,
+)
 from custom_components.sonoff.select import XSelectStartup
 from custom_components.sonoff.sensor import (
     CONCENTRATION_PARTS_PER_MILLION,
@@ -1712,6 +1718,28 @@ def test_lx_entity():
         "bright": 100,
         "light_type": 1,
     }
+
+
+def test_l3_effect_speed_and_brightness():
+    device = {
+        "extra": {"uiid": 173},
+        "params": {"effect_speed": 75, "effect_brightness": 80},
+    }
+    entities = get_entitites(device)
+    light: XLightL3 = entities[0]
+
+    payload = light.get_params(None, None, None, "7 Color Wave")
+    assert payload["speed35"] == 75
+    assert payload["bright35"] == 80
+
+    speed_entity = XEffectSpeed(DummyRegistry(), {"deviceid": DEVICEID})
+    bright_entity = XEffectBrightness(DummyRegistry(), {"deviceid": DEVICEID})
+
+    await_(speed_entity.async_set_native_value(85))
+    assert speed_entity.device["params"]["effect_speed"] == 85
+
+    await_(bright_entity.async_set_native_value(60))
+    assert bright_entity.device["params"]["effect_brightness"] == 60
 
 
 def test_light_136():
