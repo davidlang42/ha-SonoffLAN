@@ -53,6 +53,8 @@ from ..light import (
     XLightGroup,
     XLightL1,
     XLightL3,
+    XEffectSpeed,
+    XEffectBrightness,
     XMiniDim,
     XOnOffLight,
     XT5EffectLight,
@@ -460,7 +462,7 @@ DEVICES = {
     # ZBBridge-P, https://github.com/AlexxIT/SonoffLAN/issues/857
     168: [RSSI],
     # Sonoff L3-5M-P
-    173: [XLightL3, RSSI],
+    173: [XLightL3, XEffectSpeed, XEffectBrightness, RSSI],
     # Sonoff R5 (6-key remote) https://github.com/AlexxIT/SonoffLAN/issues/731
     174: [XButtonKey],
     # Sonoff S-Mate https://github.com/AlexxIT/SonoffLAN/issues/731
