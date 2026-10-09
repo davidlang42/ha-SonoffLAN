@@ -53,8 +53,6 @@ from ..light import (
     XLightGroup,
     XLightL1,
     XLightL3,
-    XEffectSpeed,
-    XEffectBrightness,
     XMiniDim,
     XOnOffLight,
     XT5EffectLight,
@@ -71,6 +69,8 @@ from ..number import (
     XPulseWidth,
     XSensitivity,
     XTempCorrectionNumber,
+    XEffectSpeed,
+    XEffectBrightness,
 )
 from ..remote import XRemote
 from ..select import XSelectStartup, XStartup
