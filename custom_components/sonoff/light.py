@@ -765,7 +765,7 @@ class XLightL3(XLightL1):
             for key in list(params.keys()):
                 if key.startswith("speed"):
                     params[key] = int(custom_speed)
-                elif key.startswith("bright") and brightness is None:
+                elif key.startswith("bright"):
                     params[key] = int(custom_brightness)
 
         return params
